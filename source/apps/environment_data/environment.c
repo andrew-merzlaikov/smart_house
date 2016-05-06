@@ -7,6 +7,29 @@
 #include <setups/base_setup.h>
 #include <apps/led_controller/led_controller.h>
 
+
+
+#include <xdc/std.h>  						//mandatory - have to include first, for BIOS types
+#include <ti/sysbios/BIOS.h> 				//mandatory - if you call APIs like BIOS_start()
+#include <xdc/runtime/Log.h>				//needed for any Log_info() call
+#include <xdc/cfg/global.h> 				//header file for statically defined objects/handles
+
+
+//------------------------------------------
+// TivaWare Header Files
+//------------------------------------------
+
+#include "inc/hw_types.h"
+#include "inc/hw_memmap.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/gpio.h"
+#include "inc/hw_ints.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/timer.h"
+
+
+
+
 #define INDEX_BUFFER 2
 
 
@@ -34,7 +57,7 @@ void ADC_ISR(void){
 	System_printf("Хардваре приывание \n");
 	System_flush();
 	ADCIntClear(ADCx_BASE, SSy);
-	Swi_post("readEnvironmentData");
+	Swi_post(readEnvironmentData);
 }
 
 
