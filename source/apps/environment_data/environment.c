@@ -1,24 +1,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include <xdc/std.h>
+#include <xdc/cfg/global.h>
 #include <xdc/runtime/System.h>
+#include <ti/sysbios/BIOS.h>
 #include "driverlib/adc.h"
-
-#include <setups/base_setup.h>
-#include <apps/led_controller/led_controller.h>
-
-
-
-#include <xdc/std.h>  						//mandatory - have to include first, for BIOS types
-#include <ti/sysbios/BIOS.h> 				//mandatory - if you call APIs like BIOS_start()
-#include <xdc/runtime/Log.h>				//needed for any Log_info() call
-#include <xdc/cfg/global.h> 				//header file for statically defined objects/handles
-
-
-//------------------------------------------
-// TivaWare Header Files
-//------------------------------------------
-
 #include "inc/hw_types.h"
 #include "inc/hw_memmap.h"
 #include "driverlib/sysctl.h"
@@ -27,7 +14,8 @@
 #include "driverlib/interrupt.h"
 #include "driverlib/timer.h"
 
-
+#include <setups/base_setup.h>
+#include <apps/led_controller/led_controller.h>
 
 
 #define INDEX_BUFFER 2
