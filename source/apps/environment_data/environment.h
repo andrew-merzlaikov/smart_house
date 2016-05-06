@@ -8,6 +8,7 @@
 #ifndef APPS_ENVIRONMENT_DATA_ENVIRONMENT_H_
 #define APPS_ENVIRONMENT_DATA_ENVIRONMENT_H_
 
-void get_data_environment(void);
+void readEnvironmentDataSWI(void);
+void ADC_ISR(void);
 
 #endif /* APPS_ENVIRONMENT_DATA_ENVIRONMENT_H_ */

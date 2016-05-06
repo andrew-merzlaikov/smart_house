@@ -1,4 +1,4 @@
-#include <stdint.h>S
+#include <stdint.h>
 #include <stdbool.h>
 
 #include "inc/hw_adc.h"
@@ -12,7 +12,7 @@
 #include "driverlib/adc.h"
 #include "driverlib/interrupt.h"
 
-#include <setups/peripheral/pwm_setup.h>
+#include <setups/base_setup.h>
 //*****************************************************************************
 //
 // Инициализация и запуск АЦП.
@@ -32,7 +32,9 @@ void adc_init_and_run(void){
 	ADCSequenceConfigure(ADCx_BASE, SSy, ADC_TRIGGER, 0);
 
 	ADCSequenceStepConfigure(ADCx_BASE, SSy, 0, ADC_CTL_CH0);
-	ADCSequenceStepConfigure(ADCx_BASE, SSy, 1, ADC_CTL_CH1|ADC_CTL_END);
+	ADCSequenceStepConfigure(
+		ADCx_BASE, SSy, 1, ADC_CTL_CH1|ADC_CTL_IE|ADC_CTL_END
+	);
 
 	ADCIntClear(ADCx_BASE, SSy);
 
@@ -40,4 +42,5 @@ void adc_init_and_run(void){
 	IntPrioritySet(INT_ADCxSSy, 1);
 
 	ADCSequenceEnable(ADCx_BASE, SSy);
+	ADCProcessorTrigger(ADCx_BASE, SSy);
 }

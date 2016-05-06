@@ -15,8 +15,6 @@ void hardware_init(void)
 	SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);
 
 //	pwm_init_and_run();
-	adc_init_and_run();
-
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
 //	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
@@ -26,4 +24,6 @@ void hardware_init(void)
 
 	GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, 4);
 	GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_4|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_4);
+
+	adc_init_and_run();
 }

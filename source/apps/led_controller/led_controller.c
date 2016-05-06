@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include <xdc/std.h>
 #include <xdc/runtime/System.h>
 
 #include <driverlib/gpio.h>
@@ -10,26 +11,19 @@
 
 #include <apps/led_controller/led_controller.h>
 
+#include "Board.h"
 
-void ledToggle(void){
-	while(1){
-		// LED values - 2=RED, 4=BLUE, 8=GREEN
-		if(GPIOPinRead(GPIO_PORTB_BASE, GPIO_PIN_4)){
-			GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_4|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_6);
-			System_printf("бля моргай ЖЕЛТЫЙ \n");
-		} else if(GPIOPinRead(GPIO_PORTB_BASE, GPIO_PIN_6)){
-			GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_4|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_7);
-			System_printf("бля моргай КРАСНЫЙ \n");
-		} else {
-			GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_4|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_4);
-			System_printf("бля моргай ЗЕЛЕНЫЙ \n");
-		}
-		System_flush();
-		// create a delay of ~1/2sec
-		Task_sleep(1001);
-	}
+void led_toggle(uint8_t led_pin){
+	// LED values - 2=RED, 4=BLUE, 8=GREEN
+	GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_4|GPIO_PIN_6|GPIO_PIN_7, led_pin);
+	System_printf("Моргаем светодиодом\n");
+	System_flush();
 }
 
-void delay(void){
-	 SysCtlDelay(6700000);		// creates ~500ms delay - TivaWare fxn
+
+void pisiaheartBeatIdle(UArg arg0, UArg arg1){
+	Task_sleep((UInt)arg0);
+	GPIO_toggle(Board_LED0);
+	System_printf("бля моргай СИНИЙ СУКА \n");
+	System_flush();
 }

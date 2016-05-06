@@ -13,6 +13,8 @@
 
 #include "pwm_setup.h"
 
+#include <setups/base_setup.h>
+
 void pwm_init_and_run(void){
 
 	volatile uint32_t ui32PWMClock; 	//Частота тактового генератора ШИМ

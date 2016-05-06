@@ -17,6 +17,7 @@
 #include "Board.h"
 
 #include <setups/base_setup.h>
+#include <setups/global_data.h>
 
 #define TASKSTACKSIZE   512
 
@@ -33,23 +34,15 @@ volatile int16_t i16ToggleCount = 0;
  *  Toggle the Board_LED0. The Task_sleep is determined by arg0 which
  *  is configured for the heartBeat Task instance.
  */
-Void PisiaheartBeatFxn(UArg arg0, UArg arg1)
-{
-    while (1) {
-        Task_sleep((UInt)arg0);
-        GPIO_toggle(Board_LED0);
-        System_printf("בכÿ למנדאי ָָֹֽׁ ׁ׃Êְ \n");
-        System_flush();
-    }
-}
 
 /*
  *  ======== main ========
  */
-int main(void)
-{
+int main(void){
 //    Task_Params taskParams;
+    init_environment_data();
     hardware_init();
+
 
     /* Call board init functions */
     Board_initGeneral();
