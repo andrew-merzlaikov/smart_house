@@ -1,2 +1,2 @@
-# smart_house
-My first tiva project
+# Base sample for work with TIVA C
+My first project. Work with interrupt, PWM.
